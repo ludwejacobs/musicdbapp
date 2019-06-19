@@ -1,6 +1,15 @@
+
 package com.company.model;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+//import java.sql.Statement;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Datasource {
     public static final String DB_NAME = "music.db";
@@ -11,7 +20,7 @@ public class Datasource {
     public static final String COLUMN_ALBUM_NAME = "name";
     public static final String COLUMN_ALBUM_ARTIST = "artist";
 
-    public static final String TABLE_ARTIST = "artis";
+    public static final String TABLE_ARTIST = "artist";
     public static final String COLUMN_ARTIST_ID = "id";
     public static final String COLUMN_ARTSIST_NAME = "name";
 
@@ -45,28 +54,25 @@ public class Datasource {
     }
 
         public List<Artist> queryArtists() {
-            Statement statement = null;
-            ResultSet results = null;
-            try {
-                statement = conn.createStatement();
-                results = statement.executeQuery("SELECT * FROM" + TABLE_ARTIST);
 
-                List<Artist> artist = new Artist<>();
+            try(Statement statement = conn.createStatement();
+            ResultSet results = statement.executeQuery("SELECT * FROM " + TABLE_ARTIST)) {
 
+
+                List<Artist> artists = new ArrayList<>();
+                while(results.next()){
+                    Artist artist = new Artist();
+                    artist.setId(results.getInt(COLUMN_ARTIST_ID));
+                    artist.setName(results.getString(COLUMN_ALBUM_NAME));
+                    artists.add(artist);
+                }
+                return artists;
 
 
             } catch (SQLException e) {
                 System.out.println("Query failed: " + e.getMessage());
                 return null;
             }
-            finally{
-                try(Sstatement != null){
-                    statement.close();
-                }
-                catch (SQLException e){
 
-                }
-            }
         }
-
 }
