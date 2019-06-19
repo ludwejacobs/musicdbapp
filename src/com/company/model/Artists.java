@@ -1,6 +1,6 @@
 package com.company.model;
 
-public class Artist {
+public class Artists {
     private int id;
     private String name;
 

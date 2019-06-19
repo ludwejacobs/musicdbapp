@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.model.Artist;
+import com.company.model.Artists;
 import com.company.model.Datasource;
 
 import java.util.List;
@@ -14,12 +14,12 @@ public class Main {
             System.out.println("Can't open datasource");
             return;
         }
-        List<Artist> artists = datasource.queryArtists();
+        List<Artists> artists = datasource.queryArtists();
         if(artists == null){
             System.out.println("No artist");
             return;
         }
-        for(Artist artist : artists){
+        for(Artists artist : artists){
             System.out.println("ID = " + artist.getId() + ", Name " + artist.getName() );
         }
         datasource.close();

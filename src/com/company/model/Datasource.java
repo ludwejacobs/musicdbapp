@@ -13,14 +13,15 @@ import java.util.List;
 
 public class Datasource {
     public static final String DB_NAME = "music.db";
-    public static final String CONNECTION_STRING = "jdbc:sqlite:C:\\Users\\Graham\\Desktop\\music.db" + DB_NAME;
+    public static final String CONNECTION_STRING = "jdbc:sqlite:C:/Users/Graham/IdeaProjects/MUSIC/music.db" + DB_NAME;
+
 
     public static final String TABLE_ALBUMS = "albums";
     public static final String COLUMN_ALBUM_ID = "id";
     public static final String COLUMN_ALBUM_NAME = "name";
     public static final String COLUMN_ALBUM_ARTIST = "artist";
 
-    public static final String TABLE_ARTIST = "artist";
+    public static final String TABLE_ARTIST = "artists";
     public static final String COLUMN_ARTIST_ID = "id";
     public static final String COLUMN_ARTSIST_NAME = "name";
 
@@ -53,15 +54,15 @@ public class Datasource {
         }
     }
 
-        public List<Artist> queryArtists() {
+        public List<Artists> queryArtists() {
 
             try(Statement statement = conn.createStatement();
             ResultSet results = statement.executeQuery("SELECT * FROM " + TABLE_ARTIST)) {
 
 
-                List<Artist> artists = new ArrayList<>();
+                List<Artists> artists = new ArrayList<>();
                 while(results.next()){
-                    Artist artist = new Artist();
+                    Artists artist = new Artists();
                     artist.setId(results.getInt(COLUMN_ARTIST_ID));
                     artist.setName(results.getString(COLUMN_ALBUM_NAME));
                     artists.add(artist);
